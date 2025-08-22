@@ -13,6 +13,8 @@ class TaskList(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        db_table = 'tasklist'
 
 class Task(models.Model):
     title = models.CharField(max_length=50)
@@ -23,9 +25,13 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tasklist_id = models.ForeignKey(TaskList, on_delete= models.CASCADE)
+    class Meta:
+        db_table = 'task'
 
 
 class SubTask(models.Model):
     title = models.CharField(max_length=50)
     status = models.CharField(max_length=25)
     task_id = models.ForeignKey(Task, on_delete= models.CASCADE)
+    class Meta:
+        db_table = 'subtask'
